@@ -125,6 +125,31 @@ function forwardMessages (chatId, fromChatId, messageIds, asAlbum) {
   })
 }
 
+function pinChatMessage (chatId, messageId, disableNotification) {
+  return new Promise((resolve, reject) => {
+    airgram.api.pinChatMessage({
+      chatId,
+      messageId,
+      disableNotification
+    }).then(({ response }) => {
+      if (response._ === 'error') return reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      resolve(response)
+    })
+  })
+}
+
+function deleteMessages (chatId, messageIds) {
+  return new Promise((resolve, reject) => {
+    airgram.api.deleteMessages({
+      chatId,
+      messageIds
+    }).then(({ response }) => {
+      if (response._ === 'error') return reject(new Error(`[TDLib][${response.code}] ${response.message}`))
+      resolve(response)
+    })
+  })
+}
+
 function getMessages (chatId, messageIds) {
   const tdlibMessageIds = messageIds.map((id) => id * Math.pow(2, 20))
 
@@ -243,6 +268,8 @@ module.exports = {
   getChat,
   getSupergroupFullInfo,
   forwardMessages,
+  pinChatMessage,
   getChatStatisticsUrl,
+  deleteMessages,
   getMessages
 }

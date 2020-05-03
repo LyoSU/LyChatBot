@@ -27,6 +27,17 @@ setInterval(() => {
   }
 }, 200)
 
+// tdlib.airgram.use((ctx, next) => {
+//   console.log(ctx)
+//   return next()
+// })
+
+tdlib.airgram.on('updateMessageSendSucceeded', ({ update, airgram }, next) => {
+  if (update.message.chatId === toChat && update.message.canBeForwarded) {
+    tdlib.pinChatMessage(toChat, update.message.id, true)
+  }
+})
+
 tdlib.airgram.on('updateNewMessage', async ({ update, airgram }) => {
   if (update.message.chatId === fromChat) {
     if (update.message.mediaAlbumId > 0) {
@@ -35,5 +46,9 @@ tdlib.airgram.on('updateNewMessage', async ({ update, airgram }) => {
     } else {
       messageIds.push(update.message.id)
     }
+  }
+
+  if (update.message.content._ === 'messagePinMessage') {
+    tdlib.deleteMessages(toChat, [update.message.id]).catch(console.error)
   }
 })
