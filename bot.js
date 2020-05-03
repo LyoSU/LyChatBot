@@ -48,7 +48,9 @@ tdlib.airgram.on('updateNewMessage', async ({ update, airgram }) => {
     }
   }
 
-  if (update.message.content._ === 'messagePinMessage') {
+  const me = await airgram.api.getMe()
+
+  if (update.message.content._ === 'messagePinMessage' && update.message.senderUserId === me.response.id) {
     tdlib.deleteMessages(toChat, [update.message.id]).catch(console.error)
   }
 })
