@@ -1,0 +1,32 @@
+{
+  "name": "lychatbot",
+  "version": "0.1.0",
+  "description": "app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start pm2.config.js --env production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LyoSU/app.git"
+  },
+  "author": "LyoSU",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LyoSU/app/issues"
+  },
+  "homepage": "https://github.com/LyoSU/app#readme",
+  "dependencies": {
+    "airgram": "^3.0.2",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
