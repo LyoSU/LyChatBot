@@ -7,4 +7,4 @@ ADD . $NODE_WORKDIR
 
 RUN npm install
 
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
